@@ -1,0 +1,48 @@
+header {
+  display: flex;
+  align-items: center;
+  background-color: #363736;
+}
+
+header img{
+  height: 65px;
+  transition: opacity 0.3s;
+}
+
+header img:hover{
+  opacity: 0.7;
+}
+header a{
+  width: 250px;
+  max-width: 250px;
+  height: 60px;
+  margin-left: auto;
+  margin-top: 0;
+}
+
+header button{
+  width: 60px;
+  height: 60px;
+  margin-left: auto;
+  margin-top: 0;
+  background-color: #363736;
+  border-color:#363736;
+  transition: opacity 0.3s;
+  border-style: none;
+}
+
+header button:hover{
+  opacity: 0.7;
+}
+
+.title {
+  color: #ffffff;
+  margin-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.icons {
+  margin-left: 3px;
+  margin-right: 3px;
+}
