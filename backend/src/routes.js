@@ -28,6 +28,7 @@ routes.delete('/supplier/:id', supplierController.delete);
 
 routes.get('/entry', entryController.index);
 routes.get('/entryGroupLote', entryController.indexGroupLote);
+routes.get('/entryMaxLote', entryController.indexMaxLote);
 routes.post('/entry', entryController.create);
 routes.put('/entry/:id', entryController.update);
 routes.put('/entry', entryController.updateLote);

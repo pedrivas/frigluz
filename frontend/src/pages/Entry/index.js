@@ -52,7 +52,7 @@ export default function SimpleTable() {
     <>
       <header>
         <img src={logoImg} alt="FrigLuz" onClick={handleHome}/>
-        <Link className="button" to="/products/new">Lançamento</Link>
+        <Link className="button" to="/entry/new">Lançamento</Link>
         <button type="button" onClick={handleLogout}>
             <FiLogOut size={30} color="#FFB357"/>
         </button>

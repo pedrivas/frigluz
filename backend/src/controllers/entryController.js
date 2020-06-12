@@ -42,6 +42,12 @@ module.exports = {
         return response.json(entry);
     },
 
+    async indexMaxLote(request, response) {
+        const entry = await connection('entry')
+        .max('lote', {as: 'maxLote'})
+        return response.json(entry);
+    },
+
     async create(request, response) {
         const { lote, supplier_id, bildate, expdate, bones,
                 missing, kassel, nf, mp, quantitymp,

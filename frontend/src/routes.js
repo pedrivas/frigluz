@@ -11,6 +11,7 @@ import NewSupplier from './pages/NewSupplier';
 import Customer from './pages/Customers';
 import NewCustomer from './pages/NewCustomer';
 import EnhancedTable from './pages/Entry';
+import NewEntry from './pages/NewEntry';
 import EntryDetail from './pages/DetailEntry';
 
 export default function Routes() {
@@ -27,6 +28,7 @@ export default function Routes() {
                 <Route path="/customers/new" component={NewCustomer} />
                 <Route path="/customers" component={Customer} />
                 <Route path="/entry/detail/:lote" component={EntryDetail} />
+                <Route path="/entry/new" component={NewEntry} />
                 <Route path="/entry" component={EnhancedTable} />
             </Switch>
         </BrowserRouter>
