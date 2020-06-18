@@ -5,6 +5,7 @@ const customerController = require('./controllers/customerController');
 const supplierController = require('./controllers/supplierController');
 const entryController = require('./controllers/entryController');
 const outputController = require('./controllers/outputController');
+const stockController = require('./controllers/stockController');
 const sessionController = require('./controllers/sessionController');
 const routes = express.Router();
 
@@ -36,11 +37,15 @@ routes.delete('/entry/:id', entryController.delete);
 routes.delete('/entry', entryController.deleteLote);
 
 routes.get('/output', outputController.index);
+routes.get('/outputGroupPedido', outputController.indexGroupPedido);
+routes.get('/outputMaxPedido', outputController.indexMaxPedido);
 routes.post('/output', outputController.create);
 routes.put('/output/:id', outputController.update);
 routes.put('/output', outputController.updatePedido);
 routes.delete('/output/:id', outputController.delete);
 routes.delete('/output', outputController.deletePedido);
+
+routes.get('/stock/:product', stockController.getStock);
 
 routes.post('/session', sessionController.create);
 

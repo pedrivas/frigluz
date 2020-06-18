@@ -32,7 +32,7 @@ header button:hover{
   opacity: 0.7;
 }
 
-.header-detail-entry a {
+.header-detail-output a {
   display: flex;
   align-items: center;
   margin-left: auto;
@@ -44,11 +44,11 @@ header button:hover{
   text-align: center;
 }
 
-.header-detail-entry a:hover  {
+.header-detail-output a:hover  {
   opacity: 0.7;
 }
 
-.detailEntry-container{
+.detailOutput-container{
   width: 100%;
   max-width: 1120px;
   height: 30vh; 
@@ -61,19 +61,20 @@ header button:hover{
   border-radius: 25px;
 }
 
-.detailEntry-container strong {
+.detailOutput-container strong {
   color: azure;
   font-size: 20px;
 }
 
-.detailEntry-container p {
+.detailOutput-container p {
   margin-left: 20px;
   margin-right: 20px;
   color:rgb(153, 153, 153);
   font-size: 16px;
 }
 
-.detailEntry-container div {
+.detailOutput-container div {
   display: flex;
   margin-top: 15px;
+  width: 100%;
 }

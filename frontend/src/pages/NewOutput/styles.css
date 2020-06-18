@@ -1,4 +1,4 @@
-.new-entry{
+.new-output{
   width: 100%;
   max-width: 1120px;
   height: 110vh; 
@@ -10,7 +10,7 @@
   justify-content: center;
 }
 
-.new-entry .content{
+.new-output .content{
   width: 100%;
   padding: 30px 20px;
   background: #363736;
@@ -23,7 +23,7 @@
   align-items: center;
 }
 
-.new-entry .content section{
+.new-output .content section{
   width: 100%;
   max-width: 1100px;
   display: flex;
@@ -31,29 +31,29 @@
   justify-content: center;
 }
 
-.new-entry .content section h1{
+.new-output .content section h1{
 
   font-size: 32px;
   margin-bottom: 15px;
 }
 
-.new-entry .content form{
+.new-output .content form{
   width: 100%;
   max-width: 1100px;
 }
 
-.new-entry .content form div{
+.new-output .content form div{
   display: inline-block;
   align-items: center;
   justify-content: center;
   height: 75px;
 }
 
-.new-entry .content form h2{
+.new-output .content form h2{
   margin-bottom: 10px;
 }
 
-.new-entry .content .plus{
+.new-output .content .plus{
   margin-left: 20px;
   margin-top: 10px;
   background: none;
@@ -62,12 +62,12 @@
   transition: opacity 0.2s;
 }
 
-.new-entry .content .plus:hover{
+.new-output .content .plus:hover{
   opacity: 0.7;
 }
 
-.new-entry .content form select{
-  width: 220px;
+.new-output .content form select{
+  width: 200px;
   border: 1px solid #FFF8F0;
   border-radius: 8px;
   background-color: #FFF8F0;
@@ -75,7 +75,7 @@
   margin-left: 10px;
 }
 
-.new-entry .content section a{
+.new-output .content section a{
   display: flex;
   align-items: center;
   margin-left: auto;
@@ -87,34 +87,36 @@
   text-align: center;
 }
 
-.new-entry .content section a:hover{
+.new-output .content section a:hover{
   opacity: 0.7;
 }
 
-.new-entry .content section a svg{
+.new-output .content section a svg{
   margin-right: 5px;
 }
 
 .input-s01{
   width: 90px;
+  margin-left: 10px;
 }
 
 .input-s02{
   width: 300px;
-  margin-left: 30px;
+  margin-left: 10px;
 }
 
 .input-s03{
   width: 250px;
-  margin-left: 26px;
+  margin-left: 10px;
 }
 
 .input-s04{
-  width: 250px;
+  width: 230px;
+  margin-left: 10px;
 }
 
 .input-s05{
-  width: 125px;
+  width: 130px;
   margin-left: 10px;
 }
 

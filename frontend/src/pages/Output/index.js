@@ -14,15 +14,15 @@ export default function SimpleTable() {
   const history = useHistory();
 
   let rows = [];
-  const [entrys, setEntrys] = useState([]);
+  const [outputs, setOutputs] = useState([]);
 
   useEffect(() => {
-    api.get('entryGroupLote').then(response => {
-      setEntrys(response.data);
+    api.get('outputGroupPedido').then(response => {
+      setOutputs(response.data);
     })
   }, [] );
 
-  rows = entrys;
+  rows = outputs;
 
   function handleHome() {
     history.push('/home');
@@ -37,36 +37,34 @@ export default function SimpleTable() {
       <>
         <header>
           <img src={logoImg} alt="FrigLuz" onClick={handleHome}/>
-          <Link className="button" to="/entry/new">Lançamento</Link>
+          <Link className="button" to="/output/new">Lançamento</Link>
           <button type="button" onClick={handleLogout}>
               <FiLogOut size={30} color="#FFB357"/>
           </button>
         </header>
-          <h1 className="title">Lotes de Entrada</h1>
-          <div className="table-entry">
+          <h1 className="title">Pedidos de Saída</h1>
+          <div className="table-output">
             <table>
               <tr>
-                <th>Lote</th>
-                <th align="right">Fornecedor</th>
-                <th align="right">Data&nbsp;de&nbsp;Faturamento</th>
-                <th align="right">Data&nbsp;de&nbsp;Expedição</th>
-                <th align="right">Nota Fiscal</th>
+                <th>Pedido</th>
+                <th align="right">Cliente</th>
+                <th align="right">Data do pedido</th>
+                <th align="right">Data&nbsp;de&nbsp;Vencimento</th>
+                <th align="right">Forma de Pagamento</th>
                 <th align="right">Detalhes</th>
               </tr>
               {rows.map((row) => (
                 <tr key={row.lote}>
-                  <td component="th" scope="row">
-                    {row.lote}
-                  </td>
+                  <td component="th">{row.pedido}</td>
                   <td align="right">{row.corpname}</td>
-                  <td align="right">{row.bildate}</td>
-                  <td align="right">{row.expdate}</td>
-                  <td align="right">{row.nf}</td>
+                  <td align="right">{row.date}</td>
+                  <td align="right">{row.deadline}</td>
+                  <td align="right">{row.payment}</td>
                   <td align="right">
                     <Link
                       to={{
-                        pathname: `/entry/detail/${row.lote}`,
-                        state: { lote:row.lote }
+                        pathname: `/output/detail/${row.pedido}`,
+                        state: { lote:row.pedido }
                       }}
                     >
                       <FiList className={"icons"} size={25} color={"#FFB357"}/>

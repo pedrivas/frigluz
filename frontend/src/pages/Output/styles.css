@@ -1,0 +1,21 @@
+.title {
+  color: #ffffff;
+  margin-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.icons {
+  margin-left: 3px;
+  margin-right: 3px;
+  transition: opacity 0.2s;
+}
+
+.icons:hover{
+  opacity: 0.8;
+}
+
+.table-output {
+  display: flex;
+  justify-content: center;
+}

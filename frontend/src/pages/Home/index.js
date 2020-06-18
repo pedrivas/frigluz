@@ -41,15 +41,11 @@ export default function Home() {
                         <Link className="link" to="/entry">Entrada</Link>
                     </p>    
                     <p>
-                        <Link className="link" to="/">Saída</Link>
+                        <Link className="link" to="/output">Saída</Link>
                     </p>
                     <h2>Relatórios</h2>
                     <p>
                         <Link className="link" to="/">Balancete</Link>
-                    </p>
-                        <Link className="link" to="/">Entrada</Link>
-                    <p>
-                        <Link className="link" to="/">Saída</Link>
                     </p>
                     <p>
                         <Link className="link" to="/">Estoque</Link> 

@@ -8,7 +8,8 @@ module.exports = {
             const entry = await connection('entry')
                 .limit(15)
                 .offset((page-1)*15)
-                .select('*')
+                .select('entry.*', 'product.description as productDescription')
+                .innerJoin('product', 'entry.product', 'product.id')
                 .where('lote', lote);    
             return response.json(entry);
         }
@@ -29,7 +30,8 @@ module.exports = {
                 .select('entry.lote','supplier.corpname','entry.bildate','entry.expdate','entry.nf', 'entry.missing', 'entry.bones', 'entry.kassel')
                 .innerJoin('supplier', 'entry.supplier_id', 'supplier.id' )
                 .where('lote',lote)
-                .groupBy('entry.lote','entry.supplier_id','entry.bildate','entry.expdate','entry.nf', 'entry.missing', 'entry.bones', 'entry.kassel'); 
+                .groupBy('entry.lote','entry.supplier_id','entry.bildate','entry.expdate','entry.nf', 'entry.missing', 'entry.bones', 'entry.kassel')
+                .orderBy('entry.lote', 'desc');
             return response.json(entry);
         }
 
@@ -38,7 +40,8 @@ module.exports = {
             .offset((page-1)*15)
             .select('entry.lote','supplier.corpname','entry.bildate','entry.expdate','entry.nf', 'entry.missing', 'entry.bones', 'entry.kassel')
             .innerJoin('supplier', 'entry.supplier_id', 'supplier.id' )
-            .groupBy('entry.lote','entry.supplier_id','entry.bildate','entry.expdate','entry.nf', 'entry.missing', 'entry.bones', 'entry.kassel');
+            .groupBy('entry.lote','entry.supplier_id','entry.bildate','entry.expdate','entry.nf', 'entry.missing', 'entry.bones', 'entry.kassel')
+            .orderBy('entry.lote', 'desc');
         return response.json(entry);
     },
 

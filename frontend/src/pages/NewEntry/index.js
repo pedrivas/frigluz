@@ -13,8 +13,8 @@ import frigImg from '../../assets/FRIGLUZ.png';
 export default function NewEntry() {
     const [lote, setLote]                 = useState('');
     const [supplier, setSupplier]         = useState('');
-    const [bilDate, setBilDate]           = useState('');
-    const [expDate, setExpDate]           = useState('');
+    const [bildate, setBilDate]           = useState('');
+    const [expdate, setExpDate]           = useState('');
     const [bones, setBones]               = useState(0);
     const [missing, setMissing]           = useState(0);
     const [kassel, setKassel]             = useState('');
@@ -61,26 +61,42 @@ export default function NewEntry() {
     async function handleNewEntry(e) {
         e.preventDefault();
 
-        const data = {
-            lote,
-            mp
-        }
+        for (var i = 0; i<itemsList.length;i++){
+          const supplier_id = supplier;
+          const mp = itemsList[i][0];
+          const quantitymp = itemsList[i][1];
+          const valuemp = itemsList[i][2];
+          const product = itemsList[i][3];
+          const quantitypr = itemsList[i][4];
+          const valuepr = itemsList[i][5];
+          const data = {
+              lote,
+              supplier_id,
+              bildate,
+              expdate,
+              bones,
+              missing,
+              kassel,
+              nf,
+              mp,
+              quantitymp,
+              valuemp,
+              product,
+              quantitypr,
+              valuepr
+          }
 
-        try {
-            const response = await api.post('entry', data);
-            history.push('/entrys')
-        } catch (err) {
-            alert(`Erro no cadastro. Tente novamente.`)
+          try {
+              const response = await api.post('entry', data);
+          } catch (err) {
+              alert(`Erro no cadastro. Tente novamente.`)
+          }
         }
+        history.push('/entry')
     }
 
     function handleAddItem(){
-      if (itemsList) {
-        setItemsList([...itemsList, [mp,quantityMp,valueMp, product, quantityPr, valuePr] ])
-      } else {
-        setItemsList([mp,quantityMp,valueMp, product, quantityPr, valuePr])       
-      }
-      console.log(itemsList);
+      setItemsList([...itemsList, [mp,quantityMp,valueMp, product, quantityPr, valuePr] ])
     }
 
     return(
@@ -115,19 +131,19 @@ export default function NewEntry() {
                             Fornecedor
                       </option>
                       {supplierList.map(supplier => (
-                        <option key={supplier.id} value={supplier.corpname}>{supplier.corpname}</option>
+                        <option key={supplier.id} value={supplier.id}>{supplier.corpname}</option>
                       ))}
                     </select>
                     <input className="input-s02"
                         placeholder="Data Faturamento"
                         type="date"
-                        value={bilDate}
+                        value={bildate}
                         onChange={e => setBilDate(e.target.value)}
                     />
                     <input className="input-s02"
                         placeholder="Data Vencimento"
                         type="date"
-                        value={expDate}
+                        value={expdate}
                         onChange={e => setExpDate(e.target.value)}
                     />
                   </div>
@@ -193,7 +209,7 @@ export default function NewEntry() {
                             PRODUTO
                         </option>
                         {productsList.map(product => (
-                        <option key={product.id} value={product.description}>{product.description}</option>
+                        <option key={product.id} value={product.id}>{product.description}</option>
                       ))}
                     </select>
                     <input className="input-s05"
@@ -206,7 +222,7 @@ export default function NewEntry() {
                         value={valuePr}
                         onChange={e => setValuePr(e.target.value)}
                     />
-                    <button className="plus" onClick={handleAddItem}>
+                    <button className="plus" type="button" onClick={handleAddItem}>
                       <FiPlusCircle size={30}/> 
                     </button>  
                   </div> 

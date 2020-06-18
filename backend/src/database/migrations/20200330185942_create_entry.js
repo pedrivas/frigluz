@@ -16,7 +16,8 @@ exports.up = function(knex) {
         table.decimal('quantitymp').notNullable();
         table.decimal('valuemp').notNullable();
 
-        table.string('product').notNullable();
+        table.integer('product').notNullable();
+        table.foreign('product').references('id').inTable('product');
         table.decimal('quantitypr').notNullable();
         table.decimal('valuepr').notNullable();
 

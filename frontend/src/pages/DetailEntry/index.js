@@ -1,15 +1,8 @@
 import React, {useState, useEffect, useCallback} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
 import { Link, useHistory, useParams } from 'react-router-dom';
-import { FiLogOut, FiEdit, FiList } from 'react-icons/fi';
+import { FiLogOut, FiArrowLeft } from 'react-icons/fi';
 
 import logoImg from '../../assets/LOGO.png';
 
@@ -17,14 +10,7 @@ import api from '../../services/api';
 
 import './styles.css';
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
-});
-
 const DetailEntry = () => {
-  const classes = useStyles();
 
   const history = useHistory();
 
@@ -57,10 +43,14 @@ const DetailEntry = () => {
 
   return (
     <>
-      <header>
+      <header className="header-detail-entry">
         <img src={logoImg} alt="FrigLuz" onClick={handleHome}/>
+        <Link to="/entry"> 
+          <FiArrowLeft size={25} color="#FFB357"/>
+          Voltar
+        </Link>
         <button type="button" onClick={handleLogout}>
-            <FiLogOut size={30} color="#FFB357"/>
+          <FiLogOut size={30} color="#FFB357"/>
         </button>
       </header>
 
@@ -99,55 +89,43 @@ const DetailEntry = () => {
       </div>
 
       <h2 className="title">Matéria-Prima</h2>
-
-      <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell align="right">Matéria Prima</TableCell>
-              <TableCell align="right">Quantidade</TableCell>
-              <TableCell align="right">Valor&nbsp;Unitário</TableCell>
-              <TableCell align="right">Valor Total</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
+      <div className="table-entry">
+        <table>
+            <tr>
+              <th align="right">Matéria Prima</th>
+              <th align="right">Quantidade</th>
+              <th align="right">Valor&nbsp;Unitário</th>
+              <th align="right">Valor Total</th>
+            </tr>
             {rows.map((row) => (
-              <TableRow key={row.mp}>
-                <TableCell component="th" scope="row" align="right">
+              <tr key={row.mp}>
+                <td component="th" scope="row" align="right">
                   {row.mp}
-                </TableCell>
-                <TableCell align="right">{row.quantitymp}</TableCell>
-                <TableCell align="right">{row.valuemp}</TableCell>
-                <TableCell align="right">{row.quantitymp*row.valuemp}</TableCell>
-              </TableRow>
+                </td>
+                <td align="right">{row.quantitymp}</td>
+                <td align="right">{row.valuemp}</td>
+                <td align="right">{row.quantitymp*row.valuemp}</td>
+              </tr>
             ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-
+        </table>
+      </div>
       <h2 className="title">Produtos</h2>
-
-      <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell align="right">Produto</TableCell>
-              <TableCell align="right">Quantidade</TableCell>
-              <TableCell align="right">P.M.C.</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
+      <div className="table-entry">
+        <table>
+            <tr>
+              <th align="right">Produto</th>
+              <th align="right">Quantidade</th>
+              <th align="right">P.M.C.</th>
+            </tr>
             {rows.map((row) => (
-              <TableRow key={row.product}>
-                <TableCell align="right">{row.product}</TableCell>
-                <TableCell align="right">{row.quantitypr}</TableCell>
-                <TableCell align="right">{row.valuepr}</TableCell>
-              </TableRow>
+              <tr key={row.product}>
+                <td align="right">{row.productDescription}</td>
+                <td align="right">{row.quantitypr}</td>
+                <td align="right">{row.valuepr}</td>
+              </tr>
             ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-
+        </table>
+      </div>
     </>
   );
 }
