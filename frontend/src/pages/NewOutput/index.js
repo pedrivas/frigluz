@@ -13,7 +13,7 @@ export default function NewOutput() {
     const [customer, setCustomer]         = useState('');
     const [date, setDate]                 = useState('');
     const [mp, setMp]                     = useState('');
-    const [product, setProduct]           = useState('');
+    const [product, setProduct]           = useState(0);
     const [packing, setPacking]           = useState('');
     const [quantity, setQuantity]         = useState('');
     const [value, setValue]               = useState('');
@@ -25,6 +25,9 @@ export default function NewOutput() {
     const [productsList, setProductsList] = useState([]);
     const [itemsList, setItemsList]       = useState([]);
     const [filteredMp, setFilteredMp]     = useState([]);
+
+    const [entrys, setEntrys]             = useState([]);
+    const [outputs, setOutputs]           = useState([]);
 
     const history = useHistory();
 
@@ -46,8 +49,8 @@ export default function NewOutput() {
 
     useEffect(() => {
       api.get('product').then(response => {
-        if (product!==''){
-          const newMp = response.data.filter(prod => prod.description === product);
+        if (product!==0){
+          const newMp = response.data.filter(prod => prod.id === Number(product));
           setFilteredMp(newMp[0].mp);
         } else {
           setProductsList(response.data);
@@ -55,6 +58,18 @@ export default function NewOutput() {
         }
       })
     }, [product] );
+
+    useEffect(() => {
+      api.get('output').then(response => {
+        setOutputs(response.data);
+      })
+    }, [] );
+
+    useEffect(() => {
+      api.get('entry').then(response => {
+        setEntrys(response.data);
+      })
+    }, [] );
 
     async function handleNewOutput(e) {
         e.preventDefault();
@@ -93,8 +108,41 @@ export default function NewOutput() {
     }
 
     function handleAddItem(){
+      const filteredEntrys = entrys.filter(entry => entry.product === Number(product));
+      const filteredOutputs = outputs.filter(output => output.product === Number(product));
+      const filteredItems = itemsList.filter(item => item.product === Number(product));
+      let distinctLotes = [];
+      filteredEntrys.forEach((entry) => {
+        if (distinctLotes.findIndex(lote => lote.lote === entry.lote) < 0){
+          distinctLotes.push({lote:entry.lote,saldo:0})
+        }
+      })
+      distinctLotes.forEach((lote) => {
+        const filteredEntrysPerLote = filteredEntrys.filter(entry => entry.lote === lote.lote);
+        const sumEntryProductPerLote = filteredEntrysPerLote.reduce((sum,entry) => {
+          return sum + entry.quantitypr;
+        }, 0);
+
+        const filteredOutputsPerLote = filteredOutputs.filter(output => output.entry_lote === lote.lote);
+        const sumOutputProductPerLote = filteredOutputsPerLote.reduce((sum,output) => {
+          return sum + output.quantity;
+        }, 0);
+
+        const filteredItemsPerLote = filteredItems.filter(item => item.entry_lote === lote.lote);
+        const sumItemProductPerLote = filteredItemsPerLote.reduce((sum,item) => {
+          return sum + item.quantity;
+        }, 0);
+        if (itemsList.length > 0){
+          lote.saldo = sumEntryProductPerLote - sumOutputProductPerLote - sumItemProductPerLote;
+        } else {
+          lote.saldo = sumEntryProductPerLote - sumOutputProductPerLote;
+        }
+      })
+      console.log (filteredEntrys);
+      console.log(distinctLotes);
+
       setItemsList([...itemsList, [product,mp,entry_lote,quantity,value,packing,volume] ])
-    }
+      }
 
     return(
         <div className="new-output">
@@ -149,14 +197,14 @@ export default function NewOutput() {
                   <h2>Itens</h2>
                   <select
                         className=""
-                        value={product}
+                        value={Number(product)}
                         onChange={e => setProduct(e.target.value)}
                     >
                         <option value="">
                             PRODUTO
                         </option>
                         {productsList.map(product => (
-                        <option key={product.id} value={product.description}>{product.description}</option>
+                        <option key={product.id} value={product.id}>{product.description}</option>
                       ))}
                     </select>
                     <input className="input-s05"
@@ -170,7 +218,7 @@ export default function NewOutput() {
                       placeholder="Lote"
                       value={entry_lote}
                       onChange={e => setEntryLote(e.target.value)}
-                      readOnly={true}
+                      //readOnly={true}
                     />
                     <input className="input-s05"
                       placeholder="Quantidade Prod"
